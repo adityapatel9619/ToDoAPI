@@ -1,4 +1,5 @@
-﻿using ToDoAPI.Model;
+﻿using Microsoft.AspNetCore.Mvc;
+using ToDoAPI.Model;
 
 namespace ToDoAPI.IHelper
 {
@@ -8,5 +9,6 @@ namespace ToDoAPI.IHelper
         Task<IEnumerable<AddToDoModel>> GetAllTodoList();
         Task<AddToDoModel> UpdateToDo(AddToDoModel updateToDo);
         Task DeleteToDo(int ToDoId);
+        Task <AddToDoModel> GetToDoById(int ToDoId);
     }
 }

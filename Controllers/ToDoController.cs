@@ -61,9 +61,30 @@ namespace ToDoAPI.Controllers
                 }
                 else
                 {
-                    return NoContent();
+                    return NotFound();
+                }                    
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+        }
+
+        [HttpPut]
+        [ActionName("UpdateToDo")]
+        public async Task<ActionResult> UpdateToDo(AddToDoModel updToDo)
+        {
+            try
+            {
+                var output = await _toDo.UpdateToDo(updToDo);
+                if (output != null)
+                {
+                    return StatusCode(StatusCodes.Status200OK, "" + updToDo.TaskName.ToString() + " is Updated Successfully");
                 }
-                    
+                else
+                {
+                    return StatusCode(StatusCodes.Status204NoContent, "Not Updated");
+                }
             }
             catch (Exception ex)
             {
@@ -72,6 +93,45 @@ namespace ToDoAPI.Controllers
             }
         }
 
+        [HttpDelete]
+        [ActionName("DeleteToDo")]
+        public async Task DeleteToDo(int Id)
+        {
+            try
+            {
+                //int delID = delToDo.Id;
+                await _toDo.DeleteToDo(Id);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message.ToString());
+            }
+        }
+
+        [HttpGet("{id:int}")]
+        [ActionName("GetToDoData")]
+        public async Task<ActionResult> GetToDoById(int id)
+        {
+            try
+            {
+                var dataToDo = await _toDo.GetToDoById(id);
+
+                if (dataToDo != null)
+                {
+                    return Ok(dataToDo);
+                }
+                else
+                {
+                    return NotFound("No Data Found");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message.ToString());
+            }
+        }
 
     }
 }
