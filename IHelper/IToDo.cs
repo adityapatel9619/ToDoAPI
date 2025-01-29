@@ -10,5 +10,6 @@ namespace ToDoAPI.IHelper
         Task<AddToDoModel> UpdateToDo(AddToDoModel updateToDo);
         Task DeleteToDo(int ToDoId);
         Task <AddToDoModel> GetToDoById(int ToDoId);
+        Task <IEnumerable<AddToDoModel>> Search(string TaskName, string TaskDesc, string StartDate, string EndDate, bool priorityLow, bool priorityMeduim, bool priorityHigh, bool IsCompleted);
     }
 }

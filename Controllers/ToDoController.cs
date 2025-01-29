@@ -27,7 +27,10 @@ namespace ToDoAPI.Controllers
                    var data =  await _toDo.AddNewToDo(addToDo);
                     if (data != null)
                     {
-                        return StatusCode(StatusCodes.Status201Created,""+addToDo.TaskName.ToString()+ " is created Successfully");
+                        //return StatusCode(StatusCodes.Status201Created,""+addToDo.TaskName.ToString()+ " is created Successfully");
+
+                        //This line returns newly created ToDo after creating
+                        return CreatedAtAction(nameof(GetToDoById), new { id = data.Id }, data);
                     }
                     else
                     {
@@ -42,8 +45,8 @@ namespace ToDoAPI.Controllers
             }
             catch (Exception ex)
             {
-
-                throw new Exception(ex.Message.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message.ToString());
+                //throw new Exception(ex.Message.ToString());
             }
         }
 
@@ -66,7 +69,8 @@ namespace ToDoAPI.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message.ToString());
+                //throw new Exception(ex.Message.ToString());
             }
         }
 
@@ -88,8 +92,8 @@ namespace ToDoAPI.Controllers
             }
             catch (Exception ex)
             {
-
-                throw new Exception(ex.Message.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message.ToString());
+                //throw new Exception(ex.Message.ToString());
             }
         }
 
@@ -104,8 +108,8 @@ namespace ToDoAPI.Controllers
             }
             catch (Exception ex)
             {
-
-                throw new Exception(ex.Message.ToString());
+                StatusCode(StatusCodes.Status500InternalServerError, ex.Message.ToString());
+                //throw new Exception(ex.Message.ToString());
             }
         }
 
@@ -128,8 +132,8 @@ namespace ToDoAPI.Controllers
             }
             catch (Exception ex)
             {
-
-                throw new Exception(ex.Message.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message.ToString());
+                //throw new Exception(ex.Message.ToString());
             }
         }
 

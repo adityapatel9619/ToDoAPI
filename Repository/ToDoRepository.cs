@@ -140,5 +140,17 @@ namespace ToDoAPI.Repository
                 throw;
             }
         }
+
+        public async Task<IEnumerable<AddToDoModel>> Search(string TaskName, string TaskDesc, string StartDate, string EndDate, bool priorityLow, bool priorityMeduim, bool priorityHigh, bool IsCompleted)
+        {
+            IQueryable<AddToDoModel> query = _appDbContext.ToDoDetails;
+
+            if (!string.IsNullOrEmpty(TaskName))
+            {
+                query = query.Where(e => e.TaskName.Contains(TaskName));
+            }
+
+            return await query.ToListAsync();
+        }
     }
 }
